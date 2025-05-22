@@ -95,5 +95,27 @@ public class ScoreEvaluatorTest {
         // Przy równej trójce wygrywa ta z wyższym tiebreakerem (4 > 2)
         assertTrue(hand4.compareTo(hand3) > 0, "Przy równej trójce wygrywa wyższy tiebreaker");
     }
+    @Test
+    public void testCompareFourOfAKindHands() {
+        int[] fourSixes = {6, 6, 6, 6, 2}; // poker (4 of a kind) szóstek
+        int[] fourFives = {5, 5, 5, 5, 3}; // poker (4 of a kind) piątek
+
+        ScoreEvaluator.HandDetail handSixes = ScoreEvaluator.evaluateDetailed(fourSixes);
+        ScoreEvaluator.HandDetail handFives = ScoreEvaluator.evaluateDetailed(fourFives);
+
+        assertTrue(handSixes.compareTo(handFives) > 0, "Poker z 6 powinien wygrać nad pokerem z 5");
+    }
+
+    @Test
+    public void testCompareFiveOfAKindHands() {
+        int[] fiveSixes = {6, 6, 6, 6, 6}; // kareta (5 of a kind) szóstek
+        int[] fiveFives = {5, 5, 5, 5, 5}; // kareta (5 of a kind) piątek
+
+        ScoreEvaluator.HandDetail handSixes = ScoreEvaluator.evaluateDetailed(fiveSixes);
+        ScoreEvaluator.HandDetail handFives = ScoreEvaluator.evaluateDetailed(fiveFives);
+
+        assertTrue(handSixes.compareTo(handFives) > 0, "Kareta z 6 powinna wygrać nad karetą z 5");
+    }
+
 
 }
