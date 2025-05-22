@@ -1,16 +1,15 @@
 import java.util.Random;
 
 public class FirstThrow {
-    public static void main (String[] args) {
+    private Random random = new Random();
+
+    public int[] roll() {
         int[] dice = new int[5];
-        Random random = new Random();
-
-        System.out.println("Pierwszy rzut kośćmi:");
-
+        System.out.println("Pierwszy rzut:");
         for (int i = 0; i < 5; i++) {
-            dice[i] = random.nextInt(6) + 1; // losuje od 1 do 6
+            dice[i] = random.nextInt(6) + 1;
             System.out.println("Kość " + (i + 1) + ": " + dice[i]);
         }
+        return dice;
     }
 }
-
