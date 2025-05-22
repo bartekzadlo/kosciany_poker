@@ -10,8 +10,12 @@ public class Game {
 
         player2.firstThrow(firstThrow);
 
+        System.out.println('\n' + player1.getName() + ":");
+        printDice(player1.getDice());
         player1.secondThrow(secondThrow);
 
+        System.out.println('\n' + player2.getName() + ":");
+        printDice(player2.getDice());
         player2.secondThrow(secondThrow);
 
         secondThrow.closeScanner();
