@@ -39,6 +39,39 @@ public class ScoreEvaluator {
         return "Najwyższa liczba oczek: " + maxValue;
     }
 
+    public static int evaluateStrength(int[] dice) {
+        int[] counts = new int[7];
+        for (int die : dice) counts[die]++;
+
+        boolean isPoker = false;
+        boolean isKareta = false;
+        boolean isFull = false;
+        boolean isTrójka = false;
+        int pairs = 0;
+
+        for (int count : counts) {
+            if (count == 5) isPoker = true;
+            if (count == 4) isKareta = true;
+            if (count == 3) isTrójka = true;
+            if (count == 2) pairs++;
+        }
+        isFull = (pairs == 1 && isTrójka);
+
+        boolean isMałyStrit = checkStraight(dice, 1);
+        boolean isDużyStrit = checkStraight(dice, 2);
+
+        if (isPoker) return 8;
+        if (isKareta) return 7;
+        if (isFull) return 6;
+        if (isDużyStrit) return 5;
+        if (isMałyStrit) return 4;
+        if (isTrójka) return 3;
+        if (pairs == 2) return 2;
+        if (pairs == 1) return 1;
+
+        return 0; // tylko najwyższa kość
+    }
+
     private static boolean checkStraight(int[] dice, int start) {
         int[] sorted = dice.clone();
         Arrays.sort(sorted);
