@@ -1,3 +1,5 @@
+package main.java;
+
 import java.util.Arrays;
 
 public class ScoreEvaluator {
@@ -157,11 +159,19 @@ public class ScoreEvaluator {
         int[] tiebreakers = new int[5];
         int idx = 0;
         for (int i = 6; i >= 1; i--) {
-            for (int j = 0; j < counts[i]; j++) {
-                if (i != primary || strength == 0) {
-                    tiebreakers[idx++] = i;
-                    if (idx == 5) break;
+            int countToAdd = counts[i];
+            if (i == primary) {
+                if (strength == 1) countToAdd--; // dla pary pomijamy jedną kość
+                else if (strength == 2) {
+                    if (i == primary) countToAdd -= 2; // dla dwóch par pomijamy dwie kości pierwszej pary
+                    else if (counts[i] == 2) countToAdd -= 2; // i dwie kości drugiej pary
                 }
+                else if (strength == 3) countToAdd -= 3; // dla trójki pomijamy trzy kości
+                else if (strength >= 6) countToAdd = 0; // dla fulla, karety, pokera pomijamy wszystkie
+            }
+            for (int j = 0; j < countToAdd; j++) {
+                tiebreakers[idx++] = i;
+                if (idx == 5) break;
             }
             if (idx == 5) break;
         }
