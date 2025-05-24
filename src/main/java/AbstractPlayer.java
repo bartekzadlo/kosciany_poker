@@ -41,7 +41,6 @@ public abstract class AbstractPlayer implements Player {
         dice = firstThrow.roll();
     }
 
-    // secondThrow pozostawimy abstrakcyjne, bo różni się dla human i AI
     @Override
     public abstract void secondThrow(SecondThrow secondThrow);
 }
