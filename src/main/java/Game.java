@@ -18,8 +18,8 @@ public class Game {
         String player2Name = scanner.nextLine();
 
 
-        Player player1 = new Player(player1Name, startingMoney);
-        Player player2 = new Player(player2Name, startingMoney);
+        Player player1 = new HumanPlayer(player1Name, startingMoney);
+        Player player2 = new HumanPlayer(player2Name, startingMoney);
 
         while (playAgain) {
             System.out.println("\nAktualny stan kont:");
