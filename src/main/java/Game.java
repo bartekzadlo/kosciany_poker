@@ -1,7 +1,7 @@
 package main.java;
 
 public class Game {
-    public static void main(String[] args) {
+    public static void playTwoPlayers() {
         FirstThrow firstThrow = new FirstThrow();
         SecondThrow secondThrow = new SecondThrow();
 
