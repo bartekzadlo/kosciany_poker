@@ -9,8 +9,17 @@ public class Game {
 
         System.out.print("Podaj początkową ilość pieniędzy dla każdego gracza: ");
         int startingMoney = scanner.nextInt();
-        Player player1 = new Player("Gracz 1", startingMoney);
-        Player player2 = new Player("Gracz 2", startingMoney);
+        scanner.nextLine();
+
+        System.out.print("Podaj imię gracza 1: ");
+        String player1Name = scanner.nextLine();
+
+        System.out.print("Podaj imię gracza 2: ");
+        String player2Name = scanner.nextLine();
+
+
+        Player player1 = new Player(player1Name, startingMoney);
+        Player player2 = new Player(player2Name, startingMoney);
 
         while (playAgain) {
             System.out.println("\nAktualny stan kont:");
