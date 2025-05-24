@@ -1,61 +1,91 @@
 package main.java;
 
+import java.util.Scanner;
+
 public class Game {
     public static void playTwoPlayers() {
-        FirstThrow firstThrow = new FirstThrow();
-        SecondThrow secondThrow = new SecondThrow();
+        Scanner scanner = new Scanner(System.in);
+        boolean playAgain = true;
 
-        Player player1 = new Player("Gracz 1");
-        Player player2 = new Player("Gracz 2");
+        while (playAgain) {
+            FirstThrow firstThrow = new FirstThrow();
+            SecondThrow secondThrow = new SecondThrow();
 
-        // Pierwszy rzut gracza 1
-        player1.firstThrow(firstThrow);
-        System.out.println("\n" + player1.getName() + ":");
-        printDice(player1.getDice());
-        System.out.println("Układ: " + ScoreEvaluator.evaluate(player1.getDice()));
+            Player player1 = new Player("Gracz 1");
+            Player player2 = new Player("Gracz 2");
 
-        // Pierwszy rzut gracza 2
-        player2.firstThrow(firstThrow);
-        System.out.println("\n" + player2.getName() + ":");
-        printDice(player2.getDice());
-        System.out.println("Układ: " + ScoreEvaluator.evaluate(player2.getDice()));
+            // Pierwszy rzut gracza 1
+            player1.firstThrow(firstThrow);
+            System.out.println("\n" + player1.getName() + ":");
+            printDice(player1.getDice());
+            System.out.println("Układ: " + ScoreEvaluator.evaluate(player1.getDice()));
 
-        // Drugi rzut gracza 1
-        System.out.println('\n' + player1.getName() + ":");
-        printDice(player1.getDice());
-        player1.secondThrow(secondThrow);
-        System.out.println("Układ po drugim rzucie: " + ScoreEvaluator.evaluate(player1.getDice()));
+            // Pierwszy rzut gracza 2
+            player2.firstThrow(firstThrow);
+            System.out.println("\n" + player2.getName() + ":");
+            printDice(player2.getDice());
+            System.out.println("Układ: " + ScoreEvaluator.evaluate(player2.getDice()));
 
-        // Drugi rzut gracza 2
-        System.out.println('\n' + player2.getName() + ":");
-        printDice(player2.getDice());
-        player2.secondThrow(secondThrow);
-        System.out.println("Układ po drugim rzucie: " + ScoreEvaluator.evaluate(player2.getDice()));
+            // Drugi rzut gracza 1
+            System.out.println('\n' + player1.getName() + ":");
+            printDice(player1.getDice());
+            player1.secondThrow(secondThrow);
+            System.out.println("Układ po drugim rzucie: " + ScoreEvaluator.evaluate(player1.getDice()));
 
-        secondThrow.closeScanner();
+            // Drugi rzut gracza 2
+            System.out.println('\n' + player2.getName() + ":");
+            printDice(player2.getDice());
+            player2.secondThrow(secondThrow);
+            System.out.println("Układ po drugim rzucie: " + ScoreEvaluator.evaluate(player2.getDice()));
 
-        System.out.println("\nWyniki końcowe:");
 
-        System.out.println(player1.getName() + ":");
-        printDice(player1.getDice());
-        String hand1 = ScoreEvaluator.evaluate(player1.getDice());
-        ScoreEvaluator.HandDetail detail1 = ScoreEvaluator.evaluateDetailed(player1.getDice());
-        System.out.println("Układ końcowy: " + hand1);
+            System.out.println("\nWyniki końcowe:");
 
-        System.out.println(player2.getName() + ":");
-        printDice(player2.getDice());
-        String hand2 = ScoreEvaluator.evaluate(player2.getDice());
-        ScoreEvaluator.HandDetail detail2 = ScoreEvaluator.evaluateDetailed(player2.getDice());
-        System.out.println("Układ końcowy: " + hand2);
+            System.out.println(player1.getName() + ":");
+            printDice(player1.getDice());
+            String hand1 = ScoreEvaluator.evaluate(player1.getDice());
+            ScoreEvaluator.HandDetail detail1 = ScoreEvaluator.evaluateDetailed(player1.getDice());
+            System.out.println("Układ końcowy: " + hand1);
 
-        System.out.println("\nZwycięzca:");
-        int result = detail1.compareTo(detail2);
-        if (result > 0) {
-            System.out.println(player1.getName() + " wygrywa!");
-        } else if (result < 0) {
-            System.out.println(player2.getName() + " wygrywa!");
-        } else {
-            System.out.println("Remis!");
+            System.out.println(player2.getName() + ":");
+            printDice(player2.getDice());
+            String hand2 = ScoreEvaluator.evaluate(player2.getDice());
+            ScoreEvaluator.HandDetail detail2 = ScoreEvaluator.evaluateDetailed(player2.getDice());
+            System.out.println("Układ końcowy: " + hand2);
+
+            System.out.println("\nZwycięzca:");
+            int result = detail1.compareTo(detail2);
+            if (result > 0) {
+                System.out.println(player1.getName() + " wygrywa!");
+            } else if (result < 0) {
+                System.out.println(player2.getName() + " wygrywa!");
+            } else {
+                System.out.println("Remis!");
+            }
+
+            // Menu po zakończeniu rundy
+            System.out.println("\nCo chcesz zrobić?");
+            System.out.println("1. Zagraj ponownie");
+            System.out.println("2. Wróć do menu głównego");
+            System.out.println("3. Zakończ grę");
+
+            int decision = scanner.nextInt();
+            switch (decision) {
+                case 1:
+                    // kontynuuj pętlę
+                    break;
+                case 2:
+                    playAgain = false;
+                    break;
+                case 3:
+                    System.out.println("Do zobaczenia!");
+                    System.exit(0); // zakończ całkowicie
+                    break;
+                default:
+                    System.out.println("Nieprawidłowy wybór, wracamy do menu.");
+                    playAgain = false;
+                    break;
+            }
         }
     }
 
