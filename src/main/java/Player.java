@@ -3,9 +3,11 @@ package main.java;
 public class Player {
     private String name;
     private int[] dice = new int[5];
+    private int money;
 
-    public Player(String name) {
+    public Player(String name, int startingMoney) {
         this.name = name;
+        this.money = startingMoney;
     }
 
     public String getName() {
@@ -14,6 +16,18 @@ public class Player {
 
     public int[] getDice() {
         return dice;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void addMoney(int amount) {
+        money += amount;
+    }
+
+    public void subtractMoney(int amount) {
+        money -= amount;
     }
 
     public void firstThrow(FirstThrow firstThrow) {
