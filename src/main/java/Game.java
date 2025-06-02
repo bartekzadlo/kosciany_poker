@@ -91,17 +91,18 @@ public class Game {
 
                 System.out.println("\nZwycięzca:");
                 int result = detail1.compareTo(detail2);
-                if (result > 0) {
+                if (result < 0) {
                     System.out.println(player1.getName() + " wygrywa i zdobywa " + currentStake + " zł!");
                     player1.addMoney(currentStake);
                     player2.subtractMoney(currentStake);
-                } else if (result < 0) {
+                } else if (result > 0) {
                     System.out.println(player2.getName() + " wygrywa i zdobywa " + currentStake + " zł!");
                     player2.addMoney(currentStake);
                     player1.subtractMoney(currentStake);
                 } else {
                     System.out.println("Remis! Nikt nie traci pieniędzy.");
                 }
+
             } else {
                 // Gdy ktoś spasował
                 System.out.println("\n" + foldWinner.getName() + " wygrywa, ponieważ przeciwnik spasował.");
