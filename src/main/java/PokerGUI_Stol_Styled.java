@@ -27,8 +27,6 @@ public class PokerGUI_Stol_Styled {
     private JLabel player1Info;
     private JLabel player2Info;
     private JTextArea logArea;
-    private boolean isPlayer1Turn = true;
-    private int currentStake = 0;
 
     private int currentPlayer = 1;
 
@@ -362,7 +360,7 @@ public class PokerGUI_Stol_Styled {
             default -> "🎲";
         };
     }
-
+    //to zobaczymy czy sie przyda
     private void updateMoneyLabels() {
         player1Info.setText(player1Name + " 💸: " + player1Money + " zł");
         player2Info.setText(player2Name + " 💸: " + player2Money + " zł");
@@ -371,14 +369,6 @@ public class PokerGUI_Stol_Styled {
     private void updatePlayerLabels() {
         player1Info.setText("<html><h2 style='color:white;'>" + player1Name + "<br>💸 " + player1Money + " zł</h2></html>");
         player2Info.setText("<html><h2 style='color:white;'>" + player2Name + "<br>💸 " + player2Money + " zł</h2></html>");
-    }
-
-    private String getCurrentPlayerName() {
-        return isPlayer1Turn ? player1Name : player2Name;
-    }
-
-    private int getCurrentPlayerMoney() {
-        return isPlayer1Turn ? player1Money : player2Money;
     }
 
 
