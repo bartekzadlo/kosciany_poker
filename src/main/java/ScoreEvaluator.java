@@ -86,11 +86,11 @@ public class ScoreEvaluator {
 
         @Override
         public int compareTo(HandDetail o) {
-            if (this.strength != o.strength) return Integer.compare(this.strength, o.strength);
-            if (this.primaryValue != o.primaryValue) return Integer.compare(this.primaryValue, o.primaryValue);
+            if (this.strength != o.strength) return Integer.compare(o.strength, this.strength);
+            if (this.primaryValue != o.primaryValue) return Integer.compare(o.primaryValue, this.primaryValue);
             for (int i = 0; i < Math.min(this.tiebreakers.length, o.tiebreakers.length); i++) {
                 if (this.tiebreakers[i] != o.tiebreakers[i])
-                    return Integer.compare(this.tiebreakers[i], o.tiebreakers[i]);
+                    return Integer.compare(o.tiebreakers[i], this.tiebreakers[i]);
             }
             return 0;
         }
