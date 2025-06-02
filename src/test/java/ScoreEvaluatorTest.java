@@ -16,7 +16,7 @@ public class ScoreEvaluatorTest {
         ScoreEvaluator.HandDetail hand2 = ScoreEvaluator.evaluateDetailed(dice2);
 
         // Para 6 powinna wygrać nad parą 1
-        assertTrue(hand1.compareTo(hand2) > 0, "Para 6 powinna być silniejsza niż para 1");
+        assertTrue(hand1.compareTo(hand2) < 0, "Para 6 powinna być silniejsza niż para 1");
     }
 
     @Test
@@ -28,7 +28,7 @@ public class ScoreEvaluatorTest {
         ScoreEvaluator.HandDetail hand2 = ScoreEvaluator.evaluateDetailed(dice2);
 
         // Para 6 wygrywa mimo, że tiebreakery mogą być różne
-        assertTrue(hand1.compareTo(hand2) > 0);
+        assertTrue(hand1.compareTo(hand2) < 0);
     }
 
     @Test
@@ -40,21 +40,20 @@ public class ScoreEvaluatorTest {
         ScoreEvaluator.HandDetail hand2 = ScoreEvaluator.evaluateDetailed(dice2);
 
         // full house z trójkami 4 wygrywa nad trójkami 3
-        assertTrue(hand2.compareTo(hand1) > 0);
+        assertTrue(hand2.compareTo(hand1) < 0);
     }
 
     @Test
     public void testEvaluateFullHouse2() {
         int[] dice1 = {2, 2, 3, 3, 3}; // full house 3 i 2
-        int[] dice2 = {3, 3, 3, 4, 4}; // full house 4 i 1
+        int[] dice2 = {3, 3, 3, 4, 4}; // full house 3 i 4
 
         ScoreEvaluator.HandDetail hand1 = ScoreEvaluator.evaluateDetailed(dice1);
         ScoreEvaluator.HandDetail hand2 = ScoreEvaluator.evaluateDetailed(dice2);
 
-        // full house z trójkami 4 wygrywa nad trójkami 3
-        assertTrue(hand2.compareTo(hand1) > 0);
+        // full house z parami 4 wygrywa nad parami 2
+        assertTrue(hand2.compareTo(hand1) < 0);
     }
-
 
     @Test
     public void testEvaluateHighCard() {
@@ -65,7 +64,7 @@ public class ScoreEvaluatorTest {
         ScoreEvaluator.HandDetail hand2 = ScoreEvaluator.evaluateDetailed(dice2);
 
         // para wygrywa nad najwyższą kartą
-        assertTrue(hand2.compareTo(hand1) > 0);
+        assertTrue(hand2.compareTo(hand1) < 0);
     }
 
     @Test
@@ -79,7 +78,7 @@ public class ScoreEvaluatorTest {
         ScoreEvaluator.HandDetail hand2 = ScoreEvaluator.evaluateDetailed(dice2);
 
         // Trójka 5 powinna wygrać nad trójką 3
-        assertTrue(hand1.compareTo(hand2) > 0, "Trójka 5 powinna być silniejsza niż trójka 3");
+        assertTrue(hand1.compareTo(hand2) < 0, "Trójka 5 powinna być silniejsza niż trójka 3");
     }
 
     @Test
@@ -93,29 +92,28 @@ public class ScoreEvaluatorTest {
         ScoreEvaluator.HandDetail hand4 = ScoreEvaluator.evaluateDetailed(dice4);
 
         // Przy równej trójce wygrywa ta z wyższym tiebreakerem (4 > 2)
-        assertTrue(hand4.compareTo(hand3) > 0, "Przy równej trójce wygrywa wyższy tiebreaker");
+        assertTrue(hand4.compareTo(hand3) < 0, "Przy równej trójce wygrywa wyższy tiebreaker");
     }
+
     @Test
     public void testCompareFourOfAKindHands() {
-        int[] fourSixes = {6, 6, 6, 6, 2}; // poker (4 of a kind) szóstek
-        int[] fourFives = {5, 5, 5, 5, 3}; // poker (4 of a kind) piątek
+        int[] fourSixes = {6, 6, 6, 6, 2}; // kareta (4 of a kind) szóstek
+        int[] fourFives = {5, 5, 5, 5, 3}; // kareta (4 of a kind) piątek
 
         ScoreEvaluator.HandDetail handSixes = ScoreEvaluator.evaluateDetailed(fourSixes);
         ScoreEvaluator.HandDetail handFives = ScoreEvaluator.evaluateDetailed(fourFives);
 
-        assertTrue(handSixes.compareTo(handFives) > 0, "Poker z 6 powinien wygrać nad pokerem z 5");
+        assertTrue(handSixes.compareTo(handFives) < 0, "Kareta z 6 powinna wygrać nad karetą z 5");
     }
 
     @Test
     public void testCompareFiveOfAKindHands() {
-        int[] fiveSixes = {6, 6, 6, 6, 6}; // kareta (5 of a kind) szóstek
-        int[] fiveFives = {5, 5, 5, 5, 5}; // kareta (5 of a kind) piątek
+        int[] fiveSixes = {6, 6, 6, 6, 6}; // poker (5 of a kind) szóstek
+        int[] fiveFives = {5, 5, 5, 5, 5}; // poker (5 of a kind) piątek
 
         ScoreEvaluator.HandDetail handSixes = ScoreEvaluator.evaluateDetailed(fiveSixes);
         ScoreEvaluator.HandDetail handFives = ScoreEvaluator.evaluateDetailed(fiveFives);
 
-        assertTrue(handSixes.compareTo(handFives) > 0, "Kareta z 6 powinna wygrać nad karetą z 5");
+        assertTrue(handSixes.compareTo(handFives) < 0, "Poker z 6 powinien wygrać nad pokerem z 5");
     }
-
-
 }
