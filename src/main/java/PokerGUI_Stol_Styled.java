@@ -3,9 +3,7 @@ package main.java;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.*;
-import java.util.List;
 public class PokerGUI_Stol_Styled {
 
     private JFrame frame;
@@ -21,20 +19,16 @@ public class PokerGUI_Stol_Styled {
     private int player1Money, player2Money;
     private int totalRounds, currentRound = 1;
     private int pula = 0;
-    private int aktualnaStawka = 0;
     private int currentBet = 0;
-    //to nie wiadomo czy sie przyda
     private JLabel player1Info;
     private JLabel player2Info;
     private JTextArea logArea;
-
     private int currentPlayer = 1;
 
     public PokerGUI_Stol_Styled() {
         frame = new JFrame("Kościany Poker - Stół");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(900, 600);
-
 
         player1Name = JOptionPane.showInputDialog(frame, "Podaj imię Gracza 1:");
         if (player1Name == null || player1Name.isBlank()) player1Name = "Gracz 1";
@@ -68,8 +62,6 @@ public class PokerGUI_Stol_Styled {
             player2Money = 100;
         }
 
-
-
         Container pane = frame.getContentPane();
         pane.setLayout(new BorderLayout());
         pane.setBackground(new Color(0, 100, 0)); // Zielony stół
@@ -92,7 +84,7 @@ public class PokerGUI_Stol_Styled {
         player2Panel.add(player2Info, BorderLayout.NORTH);
         pane.add(player2Panel, BorderLayout.EAST);
 
-        // Środek - stół
+        // Środek
         JPanel centerPanel = new JPanel();
         centerPanel.setBackground(new Color(0, 100, 0));
         centerPanel.setLayout(new BorderLayout());
@@ -125,7 +117,6 @@ public class PokerGUI_Stol_Styled {
         logArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(logArea);
         centerPanel.add(scrollPane, BorderLayout.SOUTH);
-
         pane.add(centerPanel, BorderLayout.CENTER);
 
         // Dół – przyciski
@@ -230,7 +221,6 @@ public class PokerGUI_Stol_Styled {
         updatePlayerLabels();
     }
 
-
     private void endTurn() {
         logArea.append("Gracz " + currentPlayer + " zakończył turę.\n");
 
@@ -278,7 +268,6 @@ public class PokerGUI_Stol_Styled {
             rollButton.setEnabled(false);
             endTurnButton.setEnabled(false);
 
-            // Tu kluczowa zmiana – currentRound++ dopiero PO sprawdzeniu!
             if (currentRound >= totalRounds) {
                 logArea.append("\nGra zakończona po " + totalRounds + " rundach.\n");
                 String winner;
@@ -295,8 +284,6 @@ public class PokerGUI_Stol_Styled {
             }
         }
     }
-
-
 
     private void resetRoll() {
         rollCount = 0;
@@ -327,8 +314,6 @@ public class PokerGUI_Stol_Styled {
             player2Money = 100;
         }
 
-
-        // Zapytaj o liczbę rund
         String rundyStr = JOptionPane.showInputDialog(frame, "Podaj liczbę rund (np. 5):");
         try {
             totalRounds = Integer.parseInt(rundyStr);
@@ -339,15 +324,9 @@ public class PokerGUI_Stol_Styled {
 
         currentRound = 1;
         logArea.setText("");
-        updatePlayerLabels(); // od razu zaktualizuj etykiety z kwotami
+        updatePlayerLabels();
         startNewRound();
     }
-
-
-
-
-
-
 
     private String diceEmoji(int val) {
         return switch (val) {
@@ -360,7 +339,7 @@ public class PokerGUI_Stol_Styled {
             default -> "🎲";
         };
     }
-    //to zobaczymy czy sie przyda
+
     private void updateMoneyLabels() {
         player1Info.setText(player1Name + " 💸: " + player1Money + " zł");
         player2Info.setText(player2Name + " 💸: " + player2Money + " zł");
@@ -370,8 +349,6 @@ public class PokerGUI_Stol_Styled {
         player1Info.setText("<html><h2 style='color:white;'>" + player1Name + "<br>💸 " + player1Money + " zł</h2></html>");
         player2Info.setText("<html><h2 style='color:white;'>" + player2Name + "<br>💸 " + player2Money + " zł</h2></html>");
     }
-
-
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(PokerGUI_Stol_Styled::new);
