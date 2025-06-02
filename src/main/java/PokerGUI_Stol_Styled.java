@@ -298,12 +298,31 @@ public class PokerGUI_Stol_Styled {
     }
 
     private void resetGame() {
-        player1Money = 100;
-        player2Money = 100;
-        currentRound = 1; // ważne!
+        // Zapytaj o początkową kwotę pieniędzy od nowa
+        String kwotaStr = JOptionPane.showInputDialog(frame, "Podaj początkową kwotę pieniędzy dla każdego gracza:");
+
+        try {
+            player1Money = player2Money = Integer.parseInt(kwotaStr);
+            if (player1Money <= 0) player1Money = player2Money = 100;
+        } catch (Exception e) {
+            player1Money = player2Money = 100;
+        }
+
+        // Zapytaj o liczbę rund
+        String rundyStr = JOptionPane.showInputDialog(frame, "Podaj liczbę rund (np. 5):");
+        try {
+            totalRounds = Integer.parseInt(rundyStr);
+            if (totalRounds <= 0) totalRounds = 5;
+        } catch (Exception e) {
+            totalRounds = 5;
+        }
+
+        currentRound = 1;
         logArea.setText("");
+        updatePlayerLabels(); // od razu zaktualizuj etykiety z kwotami
         startNewRound();
     }
+
 
 
 
