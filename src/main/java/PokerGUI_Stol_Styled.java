@@ -50,13 +50,24 @@ public class PokerGUI_Stol_Styled {
             totalRounds = 5;
         }
 
-        String kwotaStr = JOptionPane.showInputDialog(frame, "Podaj początkową kwotę pieniędzy dla każdego gracza:");
+        String kwota1Str = JOptionPane.showInputDialog(frame,
+                "Podaj początkową kwotę pieniędzy dla " + player1Name + ":");
         try {
-            player1Money = player2Money = Integer.parseInt(kwotaStr);
-            if (player1Money <= 0) player1Money = player2Money = 1000;
+            player1Money = Integer.parseInt(kwota1Str);
+            if (player1Money <= 0) player1Money = 100;
         } catch (Exception e) {
-            player1Money = player2Money = 1000;
+            player1Money = 100;
         }
+
+        String kwota2Str = JOptionPane.showInputDialog(frame,
+                "Podaj początkową kwotę pieniędzy dla " + player2Name + ":");
+        try {
+            player2Money = Integer.parseInt(kwota2Str);
+            if (player2Money <= 0) player2Money = 100;
+        } catch (Exception e) {
+            player2Money = 100;
+        }
+
 
 
         Container pane = frame.getContentPane();
@@ -298,15 +309,24 @@ public class PokerGUI_Stol_Styled {
     }
 
     private void resetGame() {
-        // Zapytaj o początkową kwotę pieniędzy od nowa
-        String kwotaStr = JOptionPane.showInputDialog(frame, "Podaj początkową kwotę pieniędzy dla każdego gracza:");
-
+        String kwota1Str = JOptionPane.showInputDialog(frame,
+                "Podaj początkową kwotę pieniędzy dla " + player1Name + ":");
         try {
-            player1Money = player2Money = Integer.parseInt(kwotaStr);
-            if (player1Money <= 0) player1Money = player2Money = 100;
+            player1Money = Integer.parseInt(kwota1Str);
+            if (player1Money <= 0) player1Money = 100;
         } catch (Exception e) {
-            player1Money = player2Money = 100;
+            player1Money = 100;
         }
+
+        String kwota2Str = JOptionPane.showInputDialog(frame,
+                "Podaj początkową kwotę pieniędzy dla " + player2Name + ":");
+        try {
+            player2Money = Integer.parseInt(kwota2Str);
+            if (player2Money <= 0) player2Money = 100;
+        } catch (Exception e) {
+            player2Money = 100;
+        }
+
 
         // Zapytaj o liczbę rund
         String rundyStr = JOptionPane.showInputDialog(frame, "Podaj liczbę rund (np. 5):");
