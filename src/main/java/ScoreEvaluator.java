@@ -163,11 +163,14 @@ public class ScoreEvaluator {
             if (i == primary) {
                 if (strength == 1) countToAdd--; // dla pary pomijamy jedną kość
                 else if (strength == 2) {
-                    if (i == primary) countToAdd -= 2; // dla dwóch par pomijamy dwie kości pierwszej pary
-                    else if (counts[i] == 2) countToAdd -= 2; // i dwie kości drugiej pary
+                    // Dwie pary - pomijamy dwie kości każdej pary
+                    if (counts[i] == 2) countToAdd -= 2;
                 }
                 else if (strength == 3) countToAdd -= 3; // dla trójki pomijamy trzy kości
-                else if (strength >= 6) countToAdd = 0; // dla fulla, karety, pokera pomijamy wszystkie
+                else if (strength >= 6) {
+                    if (i == primary) countToAdd = 0; // pomijamy kości układu
+                    // kości spoza układu pozostają
+                }
             }
             for (int j = 0; j < countToAdd; j++) {
                 tiebreakers[idx++] = i;
